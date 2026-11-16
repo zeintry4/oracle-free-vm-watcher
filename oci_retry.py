@@ -198,7 +198,7 @@ def main():
          #       print(f"❌ Out of capacity, retrying...")
          #  else:
          #       print(f"❌ API error: {e.message}, retrying...")
-         except Exception as e:
+        except Exception as e:
             print(f"⚠️ Network timeout or other error, retrying... ({type(e).__name__})")
 
         time.sleep(RETRY_INTERVAL)
