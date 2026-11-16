@@ -19,7 +19,7 @@ INSTANCE_NAME = "tryhard-free"
 ARM_OCPUS = 1
 ARM_MEMORY_IN_GBS = 6
 BOOT_VOLUME_SIZE_IN_GBS = 50
-RETRY_INTERVAL = 120
+RETRY_INTERVAL = 60
 # ────────────────────────────────────────────────────────
 
 # ─── OCI Authentication ──────────────────────────────────
