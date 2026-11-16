@@ -167,6 +167,7 @@ def try_create_instance(subnet_id, ad_name, image_id):
     return instance
 
 
+
 def main():
     print("Initializing network configuration...")
     subnet_id = create_vcn_and_subnet()
@@ -187,19 +188,20 @@ def main():
 
         try:
             instance = try_create_instance(subnet_id, ad_name, image_id)
-            print(f"\n✅ Success! Instance created")
+            print("\n✅ Success! Instance created")
             print(f"   ID: {instance.id}")
             print(f"   State: {instance.lifecycle_state}")
-            print(f"   Check Oracle Cloud Console for the public IP")
+            print("   Check Oracle Cloud Console for the public IP")
             break
+
         except oci.exceptions.ServiceError as e:
-            print(f"❌error: {e.message}, retrying...")
-         #   if "Out of host capacity" in str(e) or "capacity" in str(e).lower():
-         #       print(f"❌ Out of capacity, retrying...")
-         #  else:
-         #       print(f"❌ API error: {e.message}, retrying...")
+            print(f"❌ API error: {e.message}, retrying...")
+
         except Exception as e:
-            print(f"⚠️ Network timeout or other error, retrying... ({type(e).__name__})")
+            print(
+                f"⚠️ Network timeout or other error, retrying... "
+                f"({type(e).__name__}: {e})"
+            )
 
         time.sleep(RETRY_INTERVAL)
 
