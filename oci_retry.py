@@ -19,7 +19,7 @@ INSTANCE_NAME = "tryhard-free"
 ARM_OCPUS = 1
 ARM_MEMORY_IN_GBS = 6
 BOOT_VOLUME_SIZE_IN_GBS = 50
-RETRY_INTERVAL = 90
+RETRY_INTERVAL = 120
 # ────────────────────────────────────────────────────────
 
 # ─── OCI Authentication ──────────────────────────────────
@@ -193,11 +193,12 @@ def main():
             print(f"   Check Oracle Cloud Console for the public IP")
             break
         except oci.exceptions.ServiceError as e:
-            if "Out of host capacity" in str(e) or "capacity" in str(e).lower():
-                print(f"❌ Out of capacity, retrying...")
-            else:
-                print(f"❌ API error: {e.message}, retrying...")
-        except Exception as e:
+         #   if "Out of host capacity" in str(e) or "capacity" in str(e).lower():
+         #       print(f"❌ Out of capacity, retrying...")
+         #  else:
+         #       print(f"❌ API error: {e.message}, retrying...")
+            print(f"❌error: {e.message}, retrying...")
+         except Exception as e:
             print(f"⚠️ Network timeout or other error, retrying... ({type(e).__name__})")
 
         time.sleep(RETRY_INTERVAL)
